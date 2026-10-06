@@ -4,8 +4,12 @@
   "private": true,
   "description": "Full-Stack Todo Application (React + Express + TiDB Cloud)",
   "main": "backend/src/index.js",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "start": "node backend/src/index.js",
+    "build": "npm run build:prod",
     "dev": "concurrently -n backend,frontend -c blue,green \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
     "install:all": "npm --prefix backend install && npm --prefix frontend install",
     "migrate": "node backend/src/db/migrate.js",

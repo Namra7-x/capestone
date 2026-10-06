@@ -145,7 +145,22 @@ All `/api/todos` endpoints require an `Authorization: Bearer <token>` header and
 
 ## Testing
 
-The backend was verified end-to-end with a 34-point API test suite covering registration, login, validation, JWT auth, full CRUD, filtering, sorting, searching, statistics, and cross-user authorization (all passing).
+The backend was verified end-to-end with a 34-point API test suite covering registration, login, validation, JWT auth, full CRUD, filtering, sorting, searching, statistics, and cross-user authorization (all passing). The whole-folder production deploy was verified with an 11-point suite (SPA serving, SPA fallback, auth, CRUD, static assets, JSON API 404s).
+
+## Deployment
+
+The app deploys as **one whole folder** (frontend + backend together). The root `package.json` is the app manifest, a `postinstall` script builds the React frontend into `backend/public/`, and the Express server serves both the API and the SPA from a single origin.
+
+Full step-by-step instructions for Antideploy (and any similar platform) are in **[DEPLOYMENT.md](./DEPLOYMENT.md)**.
+
+Quick summary:
+
+```bash
+npm run install:all   # install dependencies
+npm run build:prod    # (optional) pre-build frontend into backend/public
+# then upload the WHOLE project folder to Antideploy and set env vars:
+#   DATABASE_URL (TiDB Cloud), JWT_SECRET, CLIENT_URL, NODE_ENV=production
+```
 
 ## License
 

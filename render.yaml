@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: flowboard
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: BCRYPT_SALT_ROUNDS
+        value: "12"
+      - key: RATE_LIMIT_MAX
+        value: "1000"
+      - key: RATE_LIMIT_WINDOW_MS
+        value: "900000"
